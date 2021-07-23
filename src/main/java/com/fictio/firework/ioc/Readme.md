@@ -58,8 +58,27 @@ Spring表达式语言,类似`ClassPathXmlApplicationContext`对象需要
    - Controller
    - Service
    - Repository
-   - Autowired
+   - Autowired: 方法和类,
    - Qualifier
+
+## DI
+### 实例创建过程[By注解]
+1. spring所需的对象,如:`xxxConfiguration/EventListener/.../AnnotationProcessor`
+2. 自定义的PostProcessor
+3. carToolboxByAnnotated(构造函数)等待
+4. hammer(toolbox依赖)完成
+5. wrench(toolbox依赖)完成
+6. toolbox注入hammer和wrench
+7. toolbox自定义BeanPostProcessor.before
+8. toolbox.PostConstruct执行
+9. toolbox自定义BeanPostProcessor.after
+
+### Toolbox实例化过程[默认]
+1. Toolbox()
+2. 创建依赖对象,使用动态代理注入对象
+3. BeanPostProcessor.before()
+4. Toolbox.@PostConstruct()
+5. BeanPostProcessor.after()
 
 # 引用
 

@@ -17,17 +17,17 @@ public class DependDemo {
     public static void main(String[] args) {
         DependDemo demo = new DependDemo();
         demo.xmlBeanFactory();
-        demo.annotatedBeanFactory(false);
+        demo.annotatedBeanFactory();
     }
 
     /**
      * 通过 AnnotationConfigApplicationContext
      * @return ApplicationContext
      */
+    @SuppressWarnings("unused")
     private ApplicationContext scanBeansByName(){
-        ApplicationContext context = new AnnotationConfigApplicationContext(CarToolboxByAnnotated.class,
+        return new AnnotationConfigApplicationContext(CarToolboxByAnnotated.class,
                 Hammer.class,Wrench.class,FwBeanPostProcessor.class,Car.class);
-        return context;
     }
 
     /**
@@ -38,19 +38,15 @@ public class DependDemo {
         return new ClassPathXmlApplicationContext("context.xml");
     }
 
-    private void annotatedBeanFactory(boolean byName){
+    private void annotatedBeanFactory(){
         ApplicationContext context;
-        if(byName) context = scanBeansByName();
-        else context = scanBeansByXml();
-        log.debug("{}",context.containsBean("carToolboxByAnnotated"));
-        log.debug("{}",context.getBean(CarToolboxByAnnotated.class));
+        // context = scanBeansByName();
+        context = scanBeansByXml();
+        log.debug("GetBeanByAnnotation: {}",context.getBean(CarToolboxByAnnotated.class));
         log.debug("{}",context.containsBean("car"));
         Car car1 = context.getBean("car",Car.class);
         Car car2 = context.getBean("car",Car.class);
         log.debug("{}",context.isPrototype("car"));
-        log.debug("{} | {}",car1.equals(car2), car1 == car2);
-        car1.setName("car1");
-        car2.setName("car2");
         log.debug("{} | {}",car1.equals(car2), car1 == car2);
         log.debug("truck={}",context.getBean(Truck.class));
     }
