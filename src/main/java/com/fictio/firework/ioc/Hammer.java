@@ -1,6 +1,7 @@
 package com.fictio.firework.ioc;
 
 import lombok.Data;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
+@Order(13)
 public class Hammer {
     private String name;
 }

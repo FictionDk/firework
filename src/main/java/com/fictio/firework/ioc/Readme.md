@@ -62,6 +62,7 @@ Spring表达式语言,类似`ClassPathXmlApplicationContext`对象需要
    - Qualifier
 
 ## DI
+
 ### 实例创建过程[By注解]
 1. spring所需的对象,如:`xxxConfiguration/EventListener/.../AnnotationProcessor`
 2. 自定义的PostProcessor
@@ -75,10 +76,16 @@ Spring表达式语言,类似`ClassPathXmlApplicationContext`对象需要
 
 ### Toolbox实例化过程[默认]
 1. Toolbox()
-2. 创建依赖对象,使用动态代理注入对象
+2. Toolbox.@Autowired,创建依赖对象,使用动态代理注入对象
 3. BeanPostProcessor.before()
 4. Toolbox.@PostConstruct()
 5. BeanPostProcessor.after()
+
+### org.springframework.core.annotation.Order注解
+1. 可用于class或@Bean方法上
+2. 可能影响注入点优先级,但不影响单例bean的启动顺序
+3. 值越小越优先级越高
+4. 可以用Priority注解替换
 
 # 引用
 
