@@ -2,11 +2,13 @@ package com.fictio.firework.ioc;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Getter
 @Setter
+@ToString
 public class Truck {
     private String driver;
     private String number;
